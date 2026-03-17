@@ -11,7 +11,7 @@ const Countries = ({ countriesPromise }) => {
       <h2>Countries: {countries.length}</h2>
       <div className="countries">
         {countries.map((country) => (
-          <Country country={country} />
+          <Country key={country.name.common} country={country} />
         ))}
       </div>
     </div>

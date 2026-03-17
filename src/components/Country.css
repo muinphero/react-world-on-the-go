@@ -3,3 +3,10 @@
   padding: 10px;
   margin: 10px;
 }
+
+.country-visited {
+  background-color: #4dbf4d;
+}
+.country-not-visited {
+  background-color: #bf4d4d;
+}
