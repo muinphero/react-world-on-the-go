@@ -5,12 +5,28 @@ import { useState } from "react";
 
 const Countries = ({ countriesPromise }) => {
   const [visitedCountries, setVisitedCountries] = useState([]);
+  const [visitedFlags, setVisitedFlags] = useState([]);
+
+  const handleVisitedFlags = (flag, isVisited) => {
+    setVisitedFlags((prevVisitedFlags) => {
+      const exists = prevVisitedFlags.includes(flag);
+
+      if (isVisited && !exists) {
+        return [...prevVisitedFlags, flag];
+      }
+
+      if (!isVisited && exists) {
+        return prevVisitedFlags.filter((visitedFlag) => visitedFlag !== flag);
+      }
+
+      return prevVisitedFlags;
+    });
+  };
 
   const handleVisistedCountries = (country, isVisited) => {
     setVisitedCountries((prevVisitedCountries) => {
       const exists = prevVisitedCountries.some(
-        (visitedCountry) =>
-          visitedCountry.name.common === country.name.common
+        (visitedCountry) => visitedCountry.name.common === country.name.common,
       );
 
       if (isVisited && !exists) {
@@ -20,7 +36,7 @@ const Countries = ({ countriesPromise }) => {
       if (!isVisited && exists) {
         return prevVisitedCountries.filter(
           (visitedCountry) =>
-            visitedCountry.name.common !== country.name.common
+            visitedCountry.name.common !== country.name.common,
         );
       }
 
@@ -40,12 +56,24 @@ const Countries = ({ countriesPromise }) => {
           <li key={country.name.common}>{country.name.common}</li>
         ))}
       </ol>
+      <h3>Visited Flags: {visitedFlags.length}</h3>
+      <div className="visited-flags">
+        {visitedFlags.map((flag) => (
+          <img
+            key={flag}
+            className="visited-flag-image"
+            src={flag}
+            alt="Visited country flag"
+          />
+        ))}
+      </div>
       <div className="countries">
         {countries.map((country) => (
           <Country
             key={country.name.common}
             country={country}
             handleVisistedCountries={handleVisistedCountries}
+            handleVisitedFlags={handleVisitedFlags}
           />
         ))}
       </div>

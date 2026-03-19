@@ -4,6 +4,17 @@
   margin: 10px;
 }
 
+.country-title {
+  min-height: 48px;
+}
+
+.country-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .country-visited {
   background-color: #4dbf4d;
 }
